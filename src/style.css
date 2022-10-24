@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input--group {
+
+  @apply flex flex-col
+}
+
+.btn--primary {
+
+  @apply bg-blue-500 w-full py-4 uppercase font-bold text-xl rounded-lg
+}
