@@ -141,4 +141,19 @@ const calcularMediana = (...values:number[]) => {
   }
 
 }
+
+type valor = string | number
+const calcularModa = (...values: valor[])=>{
+  const objeto:any = {};
+  values.forEach((number)=>{
+    if(objeto[number]){
+      objeto[number] = objeto[number] + 1
+    } else {
+      objeto[number] = 1
+    }
+  })
+  const moda = Object.entries(objeto).sort((a:any,b:any)=>a[1]-b[1])
+  return moda.at(-1)
+}
+console.log(calcularModa(1,2,3,4,5,5,5,5,6,'a','a','a','a','a','a','a','a','a','a'))
 descuentos?.addEventListener('submit', calcularDescuento)
