@@ -126,6 +126,7 @@ const calcularPromedio = (...values:number[]) => {
 }
 
 const ordenarList = (lista:number[]) => {
+  
   return lista.sort((a,b)=> a-b)
 }
 
