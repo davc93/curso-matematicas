@@ -2,33 +2,33 @@ import './style.css'
 
 console.log('TS funcionando')
 
-function precioConDescuento(precio:number, descuento:number) {
-  
-  return precio * (100 - descuento)/100
+function precioConDescuento(precio: number, descuento: number) {
+
+  return precio * (100 - descuento) / 100
 }
 
-const perimetroCuadrado = (lado:number) => {
-  
-  return lado*4
+const perimetroCuadrado = (lado: number) => {
+
+  return lado * 4
 }
 
-const areaCuadrado = (lado:number) => {
+const areaCuadrado = (lado: number) => {
 
-  return (lado*lado)
+  return (lado * lado)
 }
 
-const perimetroTriangulo = (lado1: number,lado2: number,lado3: number) => {
+const perimetroTriangulo = (lado1: number, lado2: number, lado3: number) => {
 
-  return (lado1+lado2+lado3)
+  return (lado1 + lado2 + lado3)
 }
 
-const areaTriangulo = (base:number,altura:number) => {
-  return (base*altura/2)
+const areaTriangulo = (base: number, altura: number) => {
+  return (base * altura / 2)
 }
 
-const calcularTriangulo = (lado1:number, lado2:number, base:number,altura:number) =>{
-  const perimetro = perimetroTriangulo(lado1,lado2,base);
-  const area = areaTriangulo(base,altura);
+const calcularTriangulo = (lado1: number, lado2: number, base: number, altura: number) => {
+  const perimetro = perimetroTriangulo(lado1, lado2, base);
+  const area = areaTriangulo(base, altura);
 
   return {
     perimetro,
@@ -36,18 +36,18 @@ const calcularTriangulo = (lado1:number, lado2:number, base:number,altura:number
   }
 
 }
-function circunferencia(radio:number) {
-  return Math.PI*radio*2
+function circunferencia(radio: number) {
+  return Math.PI * radio * 2
 }
-function areaCirculo(radio:number) {
-  return radio*radio*Math.PI
+function areaCirculo(radio: number) {
+  return radio * radio * Math.PI
 }
-function calcularAlturaTriangulo(lado1:number, base:number) {
+function calcularAlturaTriangulo(lado1: number, base: number) {
   if (lado1 == base) {
     console.warn('Este no es un triángulo isosceles');
   } else {
     // h = raizcuadrada(lado1**2 - (b**2)/4)
-    return Math.sqrt( (lado1 ** 2) - ( (base ** 2) ) / 4 );
+    return Math.sqrt((lado1 ** 2) - ((base ** 2)) / 4);
   }
 }
 
@@ -62,7 +62,7 @@ console.log(areaCirculo(4))
 console.groupEnd()
 
 console.group('descuentos')
-console.log(precioConDescuento(200,20));
+console.log(precioConDescuento(200, 20));
 console.groupEnd();
 
 
@@ -71,18 +71,47 @@ const descuentos = document.querySelector('#descuentos')
 console.log(descuentos)
 
 
-const calcularDescuento= (event:any) => {
+const cupones = [
+  {
+    name: 'diego',
+    descuento: 20
+  },
+  {
+    name: 'diegote',
+    descuento: 30
+  },
+  {
+    name: 'davc93',
+    descuento: 15
+  },
+
+]
+
+const precioConCupon = (precio: number, cupon: any) => {
+
+  return precio * (100 -cupon.descuento)/100
+}
+
+
+const calcularDescuento = (event: any) => {
   event.preventDefault()
   const price = event.target.precio.value
-  const descuento = event.target.descuento.value
-  console.log(price,descuento)
+  const cupon = event.target.cupon.value
+  console.log(price, cupon)
 
-  if(!price || !descuento){
+  if (!price || !cupon) {
     console.log('error no hay valores')
-    event.target.querySelector('.message').innerHTML = 'No ingresaste ningun valor'
+    event.target.querySelector('.message').innerHTML = 'No ingresaste cupon ni precio'
+    return
+
+  }
+  const matchedCupon = cupones.find((item) => cupon == item.name)
+  if (matchedCupon) {
+
+    event.target.querySelector('.message').innerHTML = `El precio te queda en ${precioConCupon(price, matchedCupon)}`
 
   } else {
-    event.target.querySelector('.message').innerHTML = `El precio con descuento es ${precioConDescuento(price,descuento)}`
+    event.target.querySelector('.message').innerHTML = 'El cupon no existe'
 
   }
 
@@ -90,4 +119,4 @@ const calcularDescuento= (event:any) => {
 
 }
 
-descuentos?.addEventListener('submit',calcularDescuento)
+descuentos?.addEventListener('submit', calcularDescuento)
