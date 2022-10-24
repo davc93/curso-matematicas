@@ -101,7 +101,7 @@ const calcularDescuento = (event: any) => {
 
   if (!price || !cupon) {
     console.log('error no hay valores')
-    event.target.querySelector('.message').innerHTML = 'No ingresaste cupon ni precio'
+    event.target.querySelector('.message').innerHTML = 'No ingresaste cupon o precio'
     return
 
   }
@@ -119,4 +119,25 @@ const calcularDescuento = (event: any) => {
 
 }
 
+const calcularPromedio = (...values:number[]) => { 
+
+  return values.reduce((previous,current)=>(previous+current),values[0])/values.length
+
+}
+
+const ordenarList = (lista:number[]) => {
+  return lista.sort((a,b)=> a-b)
+}
+
+const calcularMediana = (...values:number[]) => {
+  values = ordenarList(values)
+  if(values.length%2 == 0){
+    const mediana = (values[(values.length)/2] + values[(values.length)/2-1])/2
+    return mediana
+  } else {
+    const mediana = values[(values.length-1)/2]
+    return mediana
+  }
+
+}
 descuentos?.addEventListener('submit', calcularDescuento)

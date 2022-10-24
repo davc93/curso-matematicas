@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+h1{
+  @apply font-bold text-3xl
+}
+h2{
+  @apply font-semibold text-xl
+}
+h3{
+
+}
+p{
+  @apply font-medium text-base
+}
+span{
+  @apply font-semibold text-lg
+}
+
 .input--group {
 
   @apply flex flex-col
@@ -9,5 +25,5 @@
 
 .btn--primary {
 
-  @apply bg-blue-500 w-full py-4 uppercase font-bold text-xl rounded-lg
+  @apply bg-blue-500 w-full py-4 uppercase font-bold text-xl rounded-lg text-blue-50
 }
